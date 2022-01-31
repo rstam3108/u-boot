@@ -328,7 +328,6 @@ int board_network_enable(struct mii_dev *bus)
 	return 0;
 }
 
-#if defined(CONFIG_OF_BOARD_SETUP) && defined(CONFIG_ENV_IS_IN_SPI_FLASH)
 int ft_board_setup(void *blob, struct bd_info *bd)
 {
 	int ret;
@@ -340,6 +339,7 @@ int ft_board_setup(void *blob, struct bd_info *bd)
 	if (!of_machine_is_compatible("globalscale,espressobin"))
 		return 0;
 
+#if defined(CONFIG_OF_BOARD_SETUP) && defined(CONFIG_ENV_IS_IN_SPI_FLASH)
 	spi_off = fdt_node_offset_by_compatible(blob, -1, "jedec,spi-nor");
 	if (spi_off < 0)
 		return 0;
@@ -424,6 +424,6 @@ int ft_board_setup(void *blob, struct bd_info *bd)
 		return 0;
 	}
 
+#endif
 	return 0;
 }
-#endif

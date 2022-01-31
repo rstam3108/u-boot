@@ -146,6 +146,10 @@ static int env_ext4_load(void)
 	if (!strcmp(ifname, "mmc"))
 		mmc_initialize(NULL);
 #endif
+#ifdef CONFIG_AHCI
+	if (!strcmp(ifname, "scsi"))
+		scsi_scan(true);
+#endif
 
 	part = blk_get_device_part_str(ifname, dev_and_part,
 				       &dev_desc, &info, 1);
